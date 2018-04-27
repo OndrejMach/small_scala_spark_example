@@ -1,3 +1,5 @@
 .idea
 .gradle
 build
+spark-warehouse
+out
