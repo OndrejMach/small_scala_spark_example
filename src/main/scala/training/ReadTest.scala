@@ -28,18 +28,14 @@ object ReadTest {
     //Functions on data
     /*
     val average = reviewers.agg(avg("salary"))
-
     val avgSalary = average.as[Double].first()
-
     println(s"Average Salary is :${avgSalary}")
     */
 
     //filtering data
     /*
     val top10 = reviewers.filter($"salary" > avgSalary).sort($"salary" desc).as[Reviewer].take(10)
-
     println("TOP 10 reviewers:")
-
     for (r <- top10){
       println(s"${r.name} ${r.gender} ${r.age} ${r.salary}")
     }
@@ -55,4 +51,3 @@ object ReadTest {
     spark.stop()
   }
 }
-
