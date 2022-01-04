@@ -4,7 +4,7 @@ import org.apache.spark.sql.SparkSession
 
 case class Reviewer(id: String, name: String, gender: String, age: Long, salary: Double)
 
-object ReadTest {
+object JoinExample {
   def main(args: Array[String]): Unit = {
     val spark = SparkSession
       .builder()
@@ -26,27 +26,30 @@ object ReadTest {
     reviewers.select("name", "gender").show()
 
     //Functions on data
-    /*
+
     val average = reviewers.agg(avg("salary"))
     val avgSalary = average.as[Double].first()
     println(s"Average Salary is :${avgSalary}")
-    */
+
 
     //filtering data
-    /*
+
     val top10 = reviewers.filter($"salary" > avgSalary).sort($"salary" desc).as[Reviewer].take(10)
     println("TOP 10 reviewers:")
     for (r <- top10){
       println(s"${r.name} ${r.gender} ${r.age} ${r.salary}")
     }
-    */
+
 
     //grouping
 
-    //reviewers.groupBy("age").agg(count("*")).withColumnRenamed("count(1)", "# of people").show()
+    //
+    reviewers.groupBy("age").agg(count("*")).withColumnRenamed("count(1)", "# of people").show()
 
 
-    //task 1 - sum salary by gender
+    //join example
+    val comments = spark.read.json("data/comments.json")
+    reviewers.join(comments, Seq("id"), "inner").show(false)
 
     spark.stop()
   }

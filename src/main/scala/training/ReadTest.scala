@@ -2,7 +2,7 @@ package training
 
 import org.apache.spark.sql.SparkSession
 
-case class Reviewer(id: String, name: String, gender: String, age: Long, salary: Double)
+//case class Reviewer(id: String, name: String, gender: String, age: Long, salary: Double)
 
 object ReadTest {
   def main(args: Array[String]): Unit = {
